@@ -29,15 +29,7 @@ function Characters() {
     <div className="characters-container">
       <header className="characters-header">
         <h1 className="characters-title">Personajes de Star Wars</h1>
-        <div className="status-info">
-          {store.message && (
-            <div className={`status-message ${
-              store.message.includes("Error") ? "error" : "success"
-            }`}>
-              {store.message}
-            </div>
-          )}
-        </div>
+       
       </header>
 
       <div className="content-area">

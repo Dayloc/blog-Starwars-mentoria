@@ -3,12 +3,12 @@ export const initialStore = () => {
     message: null,
     loading: false,
     characters: [],
-    planets: [],
+    locations: [],  // Changed from 'location' to 'locations'
+    planets: [],    // Added missing planets array
     starships: [],
     vehicles: [],
     species: [],
     films: [],
-    people: [],
     favorites: [],
   };
 };
@@ -25,6 +25,12 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         planets: action.payload,
+        loading: false
+      };
+    case "locations":  // Changed from "setLocations" to "locations" for consistency
+      return {
+        ...store,
+        locations: action.payload,
         loading: false
       };
     case "starships":
@@ -49,12 +55,6 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         films: action.payload,
-        loading: false
-      };
-    case "people":
-      return {
-        ...store,
-        people: action.payload,
         loading: false
       };
     case "favorites":
@@ -122,56 +122,41 @@ export const getAllCharacters = async (dispatch) => {
   }
 };
 
-export const getAllPlanets = async (dispatch) => {
+export const getAllLocations = async (dispatch) => {
   try {
     dispatch({ type: "loading", payload: true });
-    dispatch({ type: "message", payload: "Cargando planetas..." });
+    dispatch({ type: "message", payload: "Cargando ubicaciones..." });
     
-    const response = await fetch("https://starwars-databank-server.vercel.app/api/v1/planets");
+    const response = await fetch("https://starwars-databank-server.vercel.app/api/v1/locations");
     
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log("Datos de planetas recibidos:", data); // Para diagnóstico
 
-    // Verificar varios formatos posibles
-    let planetsData = [];
-    
-    if (Array.isArray(data)) {
-      // Caso 1: La API devuelve un array directamente
-      planetsData = data;
-    } else if (data.data && Array.isArray(data.data)) {
-      // Caso 2: Formato con propiedad data
-      planetsData = data.data;
-    } else if (data.results && Array.isArray(data.results)) {
-      // Caso 3: Formato estilo SWAPI
-      planetsData = data.results;
-    } else {
-      throw new Error("Formato de datos no reconocido");
+    if (!data.data || !Array.isArray(data.data)) {
+      throw new Error("Formato de datos inesperado");
     }
 
-    // Mapeo a formato consistente
-    const formattedPlanets = planetsData.map((planet) => ({
-      id: planet._id || planet.id || Math.random().toString(36).substr(2, 9),
-      name: planet.name || "Planeta desconocido",
-      description: planet.description || planet.overview || "Descripción no disponible",
-      image: planet.image || planet.img_url || 
-            `https://starwars-visualguide.com/assets/img/planets/${planet._id || planet.id || 1}.jpg`,
-      climate: planet.climate || planet.climate_info || "Clima desconocido",
-      terrain: planet.terrain || "Terreno desconocido",
-      population: planet.population || "Población desconocida"
+    const formattedLocations = data.data.map((location) => ({
+      id: location._id,
+      name: location.name,
+      description: location.description,
+      image: location.image
     }));
 
-    dispatch({ type: "planets", payload: formattedPlanets });
-    dispatch({ type: "message", payload: `${formattedPlanets.length} planetas cargados` });
-    return formattedPlanets;
+    dispatch({ type: "locations", payload: formattedLocations });
+    dispatch({ type: "message", payload: `${formattedLocations.length} ubicaciones cargadas` });
+    return formattedLocations;
 
   } catch (error) {
-    console.error("Error al obtener planetas:", error);
-    dispatch({ type: "message", payload: `Error: ${error.message}` });
-    dispatch({ type: "planets", payload: [] });
+    console.error("Error al obtener ubicaciones:", error);
+    dispatch({ 
+      type: "message", 
+      payload: `Error: ${error.message}`
+    });
+    dispatch({ type: "locations", payload: [] });
     return [];
   } finally {
     dispatch({ type: "loading", payload: false });
@@ -238,7 +223,8 @@ export const getAllVehicles = async (dispatch) => {
       name: vehicle.name,
       description: vehicle.description,
       image: vehicle.image,
-      vehicleClass: vehicle.vehicleClass || "Clase desconocida"
+      model: vehicle.model || "Modelo desconocido",
+      manufacturer: vehicle.manufacturer || "Fabricante desconocido"
     }));
 
     dispatch({ type: "vehicles", payload: formattedVehicles });
@@ -254,7 +240,6 @@ export const getAllVehicles = async (dispatch) => {
     dispatch({ type: "loading", payload: false });
   }
 };
-
 export const getAllSpecies = async (dispatch) => {
   try {
     dispatch({ type: "loading", payload: true });
