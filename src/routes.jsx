@@ -12,6 +12,11 @@ import Characters from "./pages/Characters";
 import Planets from "./pages/Planets";
 import Vehicles from "./pages/Vehicles";
 
+//importaciones de rutas con :id
+import VehicleSpecific from "./components/VehicleSpecific";
+import CharacterSpecific from "./components/CharacterSpecific";
+import LocationSpecific from "./components/LocationSpecific";
+
 export const router = createBrowserRouter(
   createRoutesFromElements(
     // CreateRoutesFromElements function allows you to build route elements declaratively.
@@ -29,6 +34,9 @@ export const router = createBrowserRouter(
       <Route path="/characters" element={<Characters />} />{" "}
       <Route path="/planet" element={<Planets />} />{" "}
       <Route path="/vehicles" element={<Vehicles />} />{" "}
+      <Route path="/vehicle/:id" element={<VehicleSpecific />} />
+      <Route path="/character/:id" element={<CharacterSpecific />} />
+      <Route path="/location/:id" element={<LocationSpecific />} />
     </Route>
   )
 );

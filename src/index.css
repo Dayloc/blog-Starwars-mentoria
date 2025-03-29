@@ -317,8 +317,12 @@
 
 /* Animations */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive Design */
@@ -328,13 +332,13 @@
   .locations-container {
     padding: 1rem;
   }
-  
+
   .characters-title,
   .planets-title,
   .locations-title {
     font-size: 2rem;
   }
-  
+
   .characters-grid,
   .planets-grid,
   .locations-grid {
@@ -461,4 +465,72 @@
   background-color: rgba(255, 112, 67, 0.1);
   color: #ff7043;
   border: 1px solid #ff7043;
+}
+/* Estilos para el body */
+body {
+  background-image: url("https://th.bing.com/th/id/OIP.06VfyR5aimkLZBX6NS71yQHaJ4?w=768&h=1024&rs=1&pid=ImgDetMain");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: #e0e0e0;
+  font-family: "Arial", sans-serif;
+  
+  /* Capa oscura semitransparente */
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(10, 10, 26, 0.85);
+  z-index: -1;
+}
+
+/* Contenedor principal (ajusta según tu estructura) */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ajusta tus contenedores de contenido */
+.characters-container,
+.planets-container,
+.locations-container,
+.vehicles-container {
+  background: transparent; /* Elimina cualquier fondo */
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Asegura que el contenido esté sobre la capa oscura */
+.content-area {
+  position: relative;
+  z-index: 1;
+}
+.character-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.character-info {
+  flex-grow: 1;
+}
+
+.character-details {
+  margin-top: auto;
+  padding: 1.25rem;
+  text-align: center;
 }

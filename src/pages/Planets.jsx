@@ -72,7 +72,6 @@ function Planets() {
     <div className="locations-container">
       <header className="locations-header">
         <h1 className="locations-title">Archivos de Ubicaciones</h1>
-       
       </header>
 
       <div className="content-area">{renderContent()}</div>

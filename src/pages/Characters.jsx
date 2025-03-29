@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getAllCharacters } from "../store";
+import { Link } from "react-router-dom";
 
 
 function Characters() {
@@ -51,9 +52,15 @@ function Characters() {
                 <div className="character-info">
                   <h3>{character.name}</h3>
                   <p className="character-description">
+                    
                     {character.description}
                   </p>
+                  
+                  
                 </div>
+                <div className="character-details m-5">
+                 <Link to={`/character/${character.id}`}><p className="text-warning">Detail Character</p></Link> 
+                  </div>
               </div>
             ))}
           </div>
