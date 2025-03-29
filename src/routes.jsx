@@ -9,6 +9,8 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
 import Characters from "./pages/Characters";
+import Planets from "./pages/Planets";
+import Vehicles from "./pages/Vehicles";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,8 +27,8 @@ export const router = createBrowserRouter(
       <Route path="/single/:theId" element={<Single />} />{" "}
       {/* Dynamic route for single items */}
       <Route path="/characters" element={<Characters />} />{" "}
-      {/* Static route for characters */}
-      {/* Catch-all Route: This will match any other route not defined above. */}
+      <Route path="/planet" element={<Planets />} />{" "}
+      <Route path="/vehicles" element={<Vehicles />} />{" "}
     </Route>
   )
 );

@@ -1,0 +1,346 @@
+/* Estilos base */
+.characters-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 80vh;
+}
+
+.characters-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.characters-title {
+  color: #ffe81f;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.status-info {
+  min-height: 30px;
+}
+
+.status-message {
+  padding: 8px 15px;
+  border-radius: 4px;
+  margin: 10px auto;
+  max-width: 500px;
+}
+
+.status-message.success {
+  background-color: rgba(0, 255, 0, 0.1);
+  color: #4caf50;
+}
+
+.status-message.error {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #f44336;
+}
+
+/* Grid de personajes */
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.character-card {
+  background: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+}
+
+.character-image-container {
+  height: 300px;
+  overflow: hidden;
+}
+
+.character-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.character-card:hover .character-image-container img {
+  transform: scale(1.05);
+}
+
+.character-info {
+  padding: 20px;
+}
+
+.character-info h3 {
+  color: #ffe81f;
+  margin: 0 0 10px 0;
+}
+
+.character-description {
+  color: #ddd;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Estados de carga */
+.loading-state, .error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #ffe81f;
+}
+
+.loading-spinner {
+  border: 5px solid rgba(255, 232, 31, 0.3);
+  border-top: 5px solid #ffe81f;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.error-state {
+  color: #ff6b6b;
+}
+
+.retry-button {
+  background: #ffe81f;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+  background: #ffd700;
+  transform: translateY(-2px);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Estilos base */
+.planets-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 80vh;
+}
+
+.planets-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.planets-title {
+  color: #4fc3f7;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.status-info {
+  min-height: 30px;
+}
+
+.status-message {
+  padding: 8px 15px;
+  border-radius: 4px;
+  margin: 10px auto;
+  max-width: 500px;
+}
+
+.status-message.success {
+  background-color: rgba(79, 195, 247, 0.1);
+  color: #4fc3f7;
+  border: 1px solid #4fc3f7;
+}
+
+.status-message.error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+  border: 1px solid #f44336;
+}
+
+/* Grid de planetas */
+/* Estilos base */
+.planets-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #0a0a1a;
+  min-height: 100vh;
+  color: #e0e0e0;
+}
+
+.planets-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #1a3a8f;
+}
+
+.planets-title {
+  color: #4fc3f7;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(79, 195, 247, 0.5);
+}
+
+/* Estados */
+.loading-state, .error-state, .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+}
+
+.loading-spinner {
+  border: 5px solid rgba(79, 195, 247, 0.2);
+  border-top: 5px solid #4fc3f7;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+.error-state {
+  color: #ff6b6b;
+}
+
+.empty-state {
+  color: #90a4ae;
+}
+
+/* Grid de planetas */
+.planets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.planet-card {
+  background: #1a1a2e;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid #1a3a8f;
+}
+
+.planet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(79, 195, 247, 0.3);
+  border-color: #4fc3f7;
+}
+
+.planet-image-container {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.planet-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.planet-card:hover .planet-image-container img {
+  transform: scale(1.1);
+}
+
+.planet-info {
+  padding: 1.5rem;
+}
+
+.planet-info h3 {
+  color: #4fc3f7;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.planet-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.planet-meta span {
+  display: block;
+  color: #bbdefb;
+}
+
+.planet-meta strong {
+  color: #4fc3f7;
+  font-weight: 600;
+}
+
+.planet-description {
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Botones */
+.retry-button {
+  background: #4fc3f7;
+  color: #0a0a1a;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
+.retry-button:hover {
+  background: #3fb3e5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 195, 247, 0.3);
+}
+
+/* Animaciones */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .planets-container {
+    padding: 1rem;
+  }
+  
+  .planets-title {
+    font-size: 2rem;
+  }
+  
+  .planets-grid {
+    grid-template-columns: 1fr;
+  }
+}
