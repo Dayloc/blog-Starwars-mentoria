@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import '../styles/CharacterDetail.css'; 
 
 function CharacterSpecific() {
   const [personaje, setPersonaje] = useState(null);
@@ -37,7 +38,7 @@ function CharacterSpecific() {
     <div>
       {/* Renderizar tus datos aquí */}
       {personaje && (
-        <div key={personaje._id} className="character-card text-center mt-5">
+        <div key={personaje._id} className="character-card text-center mt-5 p-2">
           <div className="character-image-container">
             <img
               src={personaje.image}

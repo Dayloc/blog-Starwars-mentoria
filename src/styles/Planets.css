@@ -1,0 +1,95 @@
+/* Planets Container */
+.planets-container {
+  composes: component-container;
+}
+
+/* Planets Header */
+.planets-header {
+  composes: component-header;
+  border-bottom: 1px solid #1a3a8f;
+}
+
+.planets-title {
+  color: #4fc3f7;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(79, 195, 247, 0.5);
+}
+
+/* Planets Grid */
+.planets-grid {
+  composes: component-grid;
+}
+
+/* Planet Card */
+.planet-card {
+  composes: component-card;
+  border: 1px solid #1a3a8f;
+}
+
+.planet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(79, 195, 247, 0.3);
+  border-color: #4fc3f7;
+}
+
+/* Planet Image */
+.planet-image-container {
+  composes: component-image-container;
+}
+
+/* Planet Info */
+.planet-info {
+  composes: component-info;
+}
+
+.planet-info h3 {
+  color: #4fc3f7;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.planet-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.planet-meta span {
+  display: block;
+  color: #bbdefb;
+}
+
+.planet-meta strong {
+  color: #4fc3f7;
+  font-weight: 600;
+}
+
+.planet-description {
+  composes: component-description;
+}
+
+/* Planet Status */
+.planets-container .status-message.success {
+  background-color: rgba(79, 195, 247, 0.1);
+  color: #4fc3f7;
+  border: 1px solid #4fc3f7;
+}
+
+/* Planet Loading Spinner */
+.planets-container .loading-spinner {
+  border: 5px solid rgba(79, 195, 247, 0.2);
+  border-top: 5px solid #4fc3f7;
+}
+
+/* Planet Retry Button */
+.planets-container .retry-button {
+  background: #4fc3f7;
+}
+
+.planets-container .retry-button:hover {
+  background: #3fb3e5;
+  box-shadow: 0 4px 12px rgba(79, 195, 247, 0.3);
+}

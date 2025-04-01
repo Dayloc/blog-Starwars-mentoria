@@ -11,26 +11,27 @@ export const initialStore = () => {
     films: [],
     favorites: [],
     specificLocation: null, // Added specificLocation to store
+    specificVehicle: null, // Added specificVehicle to store
   };
 };
 
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
     case "SET_SPECIFIC_LOCATION":
-  return {
-    ...store,
-    specificLocation: action.payload,
-    loading: false,
-    error: null
-  };
+      return {
+        ...store,
+        specificLocation: action.payload,
+        loading: false,
+        error: null,
+      };
 
-case "RESET_SPECIFIC_LOCATION":
-  return {
-    ...store,
-    specificLocation: null,
-    loading: false,
-    error: action.payload || null
-  };
+    case "RESET_SPECIFIC_LOCATION":
+      return {
+        ...store,
+        specificLocation: null,
+        loading: false,
+        error: action.payload || null,
+      };
     case "characters":
       return {
         ...store,
@@ -84,6 +85,15 @@ case "RESET_SPECIFIC_LOCATION":
         message: action.payload,
       };
     case "specificLocation":
+      return {
+        ...store,
+        specificLocation: action.payload,
+      };
+    case "specificVehicle":
+      return {
+        ...store,
+        specificVehicle: action.payload,
+      };
       return {
         ...store,
         specificLocation: action.payload,
@@ -197,7 +207,9 @@ export const getSpecificLocation = async (dispatch, nombre) => {
     dispatch({ type: "RESET_SPECIFIC_LOCATION" });
 
     const response = await fetch(
-      `https://starwars-databank-server.vercel.app/api/v1/locations/name/${encodeURIComponent(nombre)}`
+      `https://starwars-databank-server.vercel.app/api/v1/locations/name/${encodeURIComponent(
+        nombre
+      )}`
     );
 
     if (!response.ok) {
@@ -220,12 +232,11 @@ export const getSpecificLocation = async (dispatch, nombre) => {
       image: locationData.image || DEFAULT_IMAGE,
       climate: locationData.climate,
       terrain: locationData.terrain,
-      population: locationData.population
+      population: locationData.population,
     };
 
     dispatch({ type: "SET_SPECIFIC_LOCATION", payload: formattedLocation });
     return formattedLocation;
-
   } catch (error) {
     console.error("Error fetching location:", error);
     dispatch({ type: "RESET_SPECIFIC_LOCATION", payload: error.message });
@@ -320,6 +331,51 @@ export const getAllVehicles = async (dispatch) => {
     dispatch({ type: "loading", payload: false });
   }
 };
+
+export const getSpecificVehicles = async (dispatch, id) => {
+  try {
+    dispatch({ type: "loading", payload: true });
+    dispatch({ type: "message", payload: "Cargando vehículos..." });
+
+    const response = await fetch(
+      `https://starwars-databank-server.vercel.app/api/v1/vehicles/${id}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.data || !Array.isArray(data.data)) {
+      throw new Error("Formato de datos inesperado");
+    }
+
+    const formattedVehicles = data.data.map((vehicle) => ({
+      id: vehicle._id,
+      name: vehicle.name,
+      description: vehicle.description,
+      image: vehicle.image,
+      model: vehicle.model || "Modelo desconocido",
+      manufacturer: vehicle.manufacturer || "Fabricante desconocido",
+    }));
+
+    dispatch({ type: "specificVehicle", payload: formattedVehicles });
+    dispatch({
+      type: "message",
+      payload: `${formattedVehicles.length} vehículos cargados`,
+    });
+    return formattedVehicles;
+  } catch (error) {
+    console.error("Error al obtener vehículos:", error);
+    dispatch({ type: "message", payload: `Error: ${error.message}` });
+    dispatch({ type: "vehicles", payload: [] });
+    return [];
+  } finally {
+    dispatch({ type: "loading", payload: false });
+  }
+};
+
 export const getAllSpecies = async (dispatch) => {
   try {
     dispatch({ type: "loading", payload: true });

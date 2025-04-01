@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
-import useGlobalReducer from '../hooks/useGlobalReducer';
-import { getAllVehicles } from '../store';
+import React, { useEffect } from "react";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import { getAllVehicles } from "../store";
+import { Link } from "react-router-dom";
+
+import "../styles/Vehicles.css";
 
 function Vehicles() {
   const { store, dispatch } = useGlobalReducer();
@@ -13,7 +16,7 @@ function Vehicles() {
       try {
         await getAllVehicles(dispatch, { signal });
       } catch (error) {
-        if (error.name !== 'AbortError') {
+        if (error.name !== "AbortError") {
           console.error("Error cargando vehículos:", error);
         }
       }
@@ -38,7 +41,7 @@ function Vehicles() {
       return (
         <div className="error-state">
           <p>¡Alerta técnica! {store.message}</p>
-          <button 
+          <button
             className="retry-button"
             onClick={() => window.location.reload()}
           >
@@ -61,25 +64,34 @@ function Vehicles() {
         {store.vehicles.map((vehicle) => (
           <div key={vehicle.id} className="vehicle-card">
             <div className="vehicle-image-container">
+              <Link to={`/vehicle/${vehicle.id}`}>
+                <img
+                  src={vehicle.image}
+                  alt={`Vehículo ${vehicle.name}`}
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://starwars-visualguide.com/assets/img/big-placeholder.jpg";
+                  }}
+                />
+              </Link>
               <img
                 src={vehicle.image}
                 alt={`Vehículo ${vehicle.name}`}
                 loading="lazy"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
+                  e.target.src =
+                    "https://starwars-visualguide.com/assets/img/big-placeholder.jpg";
                 }}
               />
             </div>
             <div className="vehicle-info">
               <h3>{vehicle.name}</h3>
-              <div className="vehicle-meta">
-                <span><strong>Modelo:</strong> {vehicle.model}</span>
-                <span><strong>Fabricante:</strong> {vehicle.manufacturer}</span>
-              </div>
-              <p className="vehicle-description">
-                {vehicle.description}
-              </p>
+              <div className="vehicle-meta"></div>
+              <p className="vehicle-description">{vehicle.description}</p>
+              <Link to={`/vehicle/${vehicle.id}`}>Detail</Link>
             </div>
           </div>
         ))}
@@ -91,12 +103,9 @@ function Vehicles() {
     <div className="vehicles-container">
       <header className="vehicles-header">
         <h1 className="vehicles-title">Archivos de Vehículos</h1>
-        
       </header>
 
-      <div className="content-area">
-        {renderContent()}
-      </div>
+      <div className="content-area">{renderContent()}</div>
     </div>
   );
 }

@@ -1,0 +1,76 @@
+/* Character Detail Container */
+.character-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 24px;
+  color: #FFD700;
+  margin-top: 50px;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 24px;
+  color: #FF0000;
+  margin-top: 50px;
+}
+
+.not-found-message {
+  text-align: center;
+  font-size: 24px;
+  color: #FFD700;
+  margin-top: 50px;
+}
+
+/* Character Detail Card */
+.character-detail-card {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  margin: 20px auto;
+  color: white;
+}
+
+/* Character Detail Image */
+.character-detail-image-container {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.character-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.character-detail-image:hover {
+  transform: scale(1.05);
+}
+
+/* Character Detail Content */
+.character-detail-content {
+  padding: 20px;
+}
+
+.character-detail-title {
+  color: #FFD700;
+  margin-bottom: 15px;
+  font-size: 28px;
+  border-bottom: 2px solid #FFD700;
+  padding-bottom: 10px;
+}
+
+.character-detail-text {
+  margin: 10px 0;
+  font-size: 18px;
+  line-height: 1.6;
+}

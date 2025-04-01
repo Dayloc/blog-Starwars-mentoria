@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getSpecificLocation } from "../store";
+import "../styles/LocationSpecific.css"; // Asegúrate de tener este archivo CSS
 
 function LocationSpecific() {
   const { store, dispatch } = useGlobalReducer();
@@ -50,7 +51,7 @@ function LocationSpecific() {
     store.specificLocation;
 
   return (
-    <div className="character-card">
+    <div className="character-card p-2">
       <h1 className="location-title">{name}</h1>
 
       <div className="character-image-container">
@@ -64,7 +65,7 @@ function LocationSpecific() {
         />
       </div>
 
-      <div className="location-content">
+      <div className="location-content p-2">
         <section className="description-section">
           <h2>Descripción</h2>
           <p>{description}</p>
