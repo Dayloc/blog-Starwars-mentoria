@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getSpecificLocation } from "../store";
 import "../styles/LocationSpecific.css"; // Asegúrate de tener este archivo CSS
+import FavoriteButton from "./FavoriteBuuton";
 
 function LocationSpecific() {
   const { store, dispatch } = useGlobalReducer();
@@ -69,6 +70,13 @@ function LocationSpecific() {
         <section className="description-section">
           <h2>Descripción</h2>
           <p>{description}</p>
+          <div>
+          <div>
+            <FavoriteButton
+            item={store.specificLocation} 
+            type="vehicle" />
+          </div>
+          </div>
         </section>
 
         <div className="location-details">

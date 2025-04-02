@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/CharacterDetail.css'; 
+import FavoriteButton from '../components/FavoriteBuuton'; // Asegúrate de que la ruta sea correcta
 
 function CharacterSpecific() {
   const [personaje, setPersonaje] = useState(null);
@@ -9,7 +10,7 @@ function CharacterSpecific() {
   const [error, setError] = useState(null);
   const { id } = useParams(); // Obtener el ID de los parámetros de la URL
 
-  console.log(personaje);
+
 
   useEffect(() => {
     fetchData();
@@ -57,7 +58,11 @@ function CharacterSpecific() {
              <p className='m-4'> {personaje.description}
               </p>
           </div>
-          
+          <div>
+            <FavoriteButton
+            item={personaje} 
+            type="vehicle" />
+          </div>
         </div>
       )}
     </div>
