@@ -11,7 +11,8 @@ import { Home } from "./pages/Home";
 import Characters from "./pages/Characters";
 import Planets from "./pages/Planets";
 import Vehicles from "./pages/Vehicles";
-
+import FavoriteButton from "./components/FavoriteBuuton";
+import FavoritesPage from "./pages/FavoriteList";
 //importaciones de rutas con :id
 import VehicleSpecific from "./components/VehicleSpecific";
 import CharacterSpecific from "./components/CharacterSpecific";
@@ -37,6 +38,9 @@ export const router = createBrowserRouter(
       <Route path="/vehicle/:id" element={<VehicleSpecific />} />
       <Route path="/character/:id" element={<CharacterSpecific />} />
       <Route path="/location/:nombre" element={<LocationSpecific />} />
+      <Route path="/favorites" element={<FavoriteButton />} />
+      <Route path="/favoritesList" element={<FavoritesPage />} />
+      {/* Add more routes as needed */}
     </Route>
   )
 );

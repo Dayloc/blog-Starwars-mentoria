@@ -36,7 +36,7 @@ function CharacterSpecific() {
 
   return (
     <div>
-      {/* Renderizar tus datos aquí */}
+      {/* Renderizar  datos aquí */}
       {personaje && (
         <div key={personaje._id} className="character-card text-center mt-5 p-2">
           <div className="character-image-container">

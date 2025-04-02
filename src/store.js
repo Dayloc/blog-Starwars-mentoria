@@ -2,111 +2,87 @@ export const initialStore = () => {
   return {
     message: null,
     loading: false,
+    error: null, // Añadido para manejo consistente de errores
     characters: [],
-    locations: [], // Changed from 'location' to 'locations'
-    planets: [], // Added missing planets array
+    locations: [],
+    planets: [],
     starships: [],
     vehicles: [],
     species: [],
     films: [],
     favorites: [],
-    specificLocation: null, // Added specificLocation to store
-    specificVehicle: null, // Added specificVehicle to store
+    specificLocation: null,
+    specificVehicle: null,
+    specificCharacter: null, // Sugerido para consistencia
+    specificFilm: null,     // Sugerido para consistencia
   };
 };
 
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
+    // Casos generales
+    case "loading":
+      return { ...store, loading: action.payload };
+    case "message":
+      return { ...store, message: action.payload, error: null };
+    case "error":
+      return { ...store, error: action.payload, loading: false };
+    case "reset":
+      return initialStore();
+
+    // Listados
+    case "characters":
+      return { ...store, characters: action.payload, loading: false };
+    case "planets":
+      return { ...store, planets: action.payload, loading: false };
+    case "locations":
+      return { ...store, locations: action.payload, loading: false };
+    case "starships":
+      return { ...store, starships: action.payload, loading: false };
+    case "vehicles":
+      return { ...store, vehicles: action.payload, loading: false };
+    case "species":
+      return { ...store, species: action.payload, loading: false };
+    case "films":
+      return { ...store, films: action.payload, loading: false };
+      case "ADD_FAVORITE":
+        return {
+          ...store,
+          favorites: [...store.favorites, action.payload],
+          message: `${action.payload.name} añadido a favoritos`
+        };
+      
+      case "REMOVE_FAVORITE":
+        return {
+          ...store,
+          favorites: store.favorites.filter(item => item.id !== action.payload.id),
+          message: `${action.payload.name} removido de favoritos`
+        };
+
+    // Detalles específicos
     case "SET_SPECIFIC_LOCATION":
       return {
         ...store,
         specificLocation: action.payload,
         loading: false,
-        error: null,
+        error: null
       };
-
     case "RESET_SPECIFIC_LOCATION":
-      return {
-        ...store,
-        specificLocation: null,
-        loading: false,
-        error: action.payload || null,
-      };
-    case "characters":
-      return {
-        ...store,
-        characters: action.payload,
-        loading: false,
-      };
-    case "planets":
-      return {
-        ...store,
-        planets: action.payload,
-        loading: false,
-      };
-    case "locations": // Changed from "setLocations" to "locations" for consistency
-      return {
-        ...store,
-        locations: action.payload,
-        loading: false,
-      };
-    case "starships":
-      return {
-        ...store,
-        starships: action.payload,
-        loading: false,
-      };
-    case "vehicles":
-      return {
-        ...store,
-        vehicles: action.payload,
-        loading: false,
-      };
-    case "species":
-      return {
-        ...store,
-        species: action.payload,
-        loading: false,
-      };
-    case "films":
-      return {
-        ...store,
-        films: action.payload,
-        loading: false,
-      };
-    case "favorites":
-      return {
-        ...store,
-        favorites: action.payload,
-      };
-    case "message":
-      return {
-        ...store,
-        message: action.payload,
-      };
-    case "specificLocation":
-      return {
-        ...store,
-        specificLocation: action.payload,
-      };
-    case "specificVehicle":
+      return { ...store, specificLocation: null };
+      
+    case "SET_SPECIFIC_VEHICLE":
       return {
         ...store,
         specificVehicle: action.payload,
+        loading: false,
+        error: null
       };
-      return {
-        ...store,
-        specificLocation: action.payload,
-      };
-    case "loading":
-      return {
-        ...store,
-        loading: action.payload,
-      };
-    case "reset":
-      return initialStore();
+    case "RESET_SPECIFIC_VEHICLE":
+      return { ...store, specificVehicle: null };
+
     default:
-      throw new Error("Unknown action.");
+      console.warn(`Acción desconocida: ${action.type}`);
+      return store;
   }
 }
 
@@ -332,10 +308,10 @@ export const getAllVehicles = async (dispatch) => {
   }
 };
 
-export const getSpecificVehicles = async (dispatch, id) => {
+export const getSpecificVehicle = async (dispatch, id) => {
   try {
     dispatch({ type: "loading", payload: true });
-    dispatch({ type: "message", payload: "Cargando vehículos..." });
+    dispatch({ type: "message", payload: "Cargando vehículo..." });
 
     const response = await fetch(
       `https://starwars-databank-server.vercel.app/api/v1/vehicles/${id}`
@@ -347,34 +323,40 @@ export const getSpecificVehicles = async (dispatch, id) => {
 
     const data = await response.json();
 
-    if (!data.data || !Array.isArray(data.data)) {
-      throw new Error("Formato de datos inesperado");
+    // Validación acorde a la respuesta real
+    if (!data || !data._id) {
+      throw new Error("El vehículo no contiene los datos esperados");
     }
 
-    const formattedVehicles = data.data.map((vehicle) => ({
-      id: vehicle._id,
-      name: vehicle.name,
-      description: vehicle.description,
-      image: vehicle.image,
-      model: vehicle.model || "Modelo desconocido",
-      manufacturer: vehicle.manufacturer || "Fabricante desconocido",
-    }));
+    const formattedVehicle = {
+      id: data._id,
+      name: data.name,
+      description: data.description,
+      image: data.image,
+      // Estos campos son opcionales según la respuesta
+      model: data.model || null,
+      manufacturer: data.manufacturer || null,
+      // Mantenemos toda la data por si acaso
+      ...data
+    };
 
-    dispatch({ type: "specificVehicle", payload: formattedVehicles });
+    dispatch({ type: "SET_SPECIFIC_VEHICLE", payload: formattedVehicle });
     dispatch({
       type: "message",
-      payload: `${formattedVehicles.length} vehículos cargados`,
+      payload: `Vehículo "${formattedVehicle.name}" cargado`,
     });
-    return formattedVehicles;
+    return formattedVehicle;
   } catch (error) {
-    console.error("Error al obtener vehículos:", error);
-    dispatch({ type: "message", payload: `Error: ${error.message}` });
-    dispatch({ type: "vehicles", payload: [] });
-    return [];
+    console.error("Error al obtener el vehículo:", error);
+    dispatch({ type: "error", payload: error.message });
+    dispatch({ type: "SET_SPECIFIC_VEHICLE", payload: null });
+    return null;
   } finally {
     dispatch({ type: "loading", payload: false });
   }
 };
+
+
 
 export const getAllSpecies = async (dispatch) => {
   try {
@@ -507,20 +489,26 @@ export const getAllPeople = async (dispatch) => {
 };
 
 // Funciones para manejar favoritos
-export const addFavorite = (store) => (item) => {
-  const newFavorites = [...store.favorites, item];
-  return {
-    type: "favorites",
-    payload: newFavorites,
-  };
+export const addToFavorites = (item) => (dispatch) => {
+  dispatch({
+    type: "ADD_FAVORITE",
+    payload: {
+      id: item._id || item.id,
+      name: item.name,
+      type: item.type || 'vehicle', // 'character', 'planet', etc.
+      image: item.image
+    }
+  });
 };
 
-export const removeFavorite = (store) => (itemId) => {
-  const newFavorites = store.favorites.filter((item) => item.id !== itemId);
-  return {
-    type: "favorites",
-    payload: newFavorites,
-  };
+export const removeFromFavorites = (item) => (dispatch) => {
+  dispatch({
+    type: "REMOVE_FAVORITE",
+    payload: {
+      id: item._id || item.id,
+      name: item.name
+    }
+  });
 };
 
 // Función para resetear el store

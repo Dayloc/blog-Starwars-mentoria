@@ -674,3 +674,254 @@ body::before {
 .details p {
   margin: 5px 0;
 }
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #09f;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-state {
+  color: #d32f2f;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* VehicleSpecific Styles */
+.vehicle-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.vehicle-card {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  margin: 20px auto;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-image-container {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.vehicle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.vehicle-image:hover {
+  transform: scale(1.05);
+}
+
+.vehicle-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-title {
+  color: #FF7043;
+  margin-bottom: 20px;
+  font-size: 32px;
+  border-bottom: 2px solid #FF7043;
+  padding-bottom: 10px;
+}
+
+.vehicle-text {
+  margin: 15px 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.vehicle-text strong {
+  color: #FF7043;
+}
+
+.vehicle-details {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.detail-item {
+  background: rgba(255, 112, 67, 0.1);
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 3px solid #FF7043;
+}
+
+.detail-item strong {
+  display: block;
+  color: #FF7043;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.detail-item span {
+  font-size: 18px;
+}
+
+/* Loading and Error States (consistent with character styles) */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: #FFD700;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 112, 67, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #FF7043;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+.error-state {
+  text-align: center;
+  padding: 30px;
+  color: #ff6b6b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-state h3 {
+  color: #ff6b6b;
+  margin-bottom: 15px;
+}
+
+.retry-button {
+  background-color: #FF7043;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 15px;
+}
+
+.retry-button:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+}
+
+.not-found-message {
+  text-align: center;
+  font-size: 24px;
+  color: #FF7043;
+  margin-top: 50px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vehicle-card {
+    max-width: 100%;
+  }
+  
+  .vehicle-image-container {
+    height: 300px;
+  }
+  
+  .vehicle-title {
+    font-size: 28px;
+  }
+  
+  .vehicle-details {
+    grid-template-columns: 1fr;
+  }
+}
+/* Agrega esto a tu archivo CSS */
+.favorite-button {
+  background-color: #1a1a2e;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.favorite-button:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.favorite-button.is-favorite {
+  background-color: rgba(255, 215, 0, 0.2);
+  color: #FFD700;
+}
+
+/* Estilos específicos por tipo */
+.character-container .favorite-button {
+  border-color: #ffe81f;
+  color: #ffe81f;
+}
+
+.planet-container .favorite-button {
+  border-color: #4fc3f7;
+  color: #4fc3f7;
+}
+
+.vehicle-container .favorite-button {
+  border-color: #ff7043;
+  color: #ff7043;
+}
+
+.notification {
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  background-color: rgba(30, 30, 60, 0.8);
+  color: #e0e0e0;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
