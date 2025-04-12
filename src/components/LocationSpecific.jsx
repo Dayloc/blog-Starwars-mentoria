@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { getSpecificLocation } from "../store";
+
 import "../styles/LocationSpecific.css"; // Asegúrate de tener este archivo CSS
 import FavoriteButton from "./FavoriteBuuton";
+import { getSpecificLocation } from "../services/Fetch";
 
 function LocationSpecific() {
   const { store, dispatch } = useGlobalReducer();

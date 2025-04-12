@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import '../styles/CharacterDetail.css'; 
 import FavoriteButton from '../components/FavoriteBuuton'; // Asegúrate de que la ruta sea correcta
 
+
 function CharacterSpecific() {
   const [personaje, setPersonaje] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -14,7 +15,7 @@ function CharacterSpecific() {
 
   useEffect(() => {
     fetchData();
-  }, [id]); // Added id as dependency to refetch if id changes
+  }, [id,dispatch]); // Added id as dependency to refetch if id changes
 
   const fetchData = async () => {
     try {

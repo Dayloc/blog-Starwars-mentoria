@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { getAllVehicles } from "../store";
+import { getAllVehicles } from "../services/Fetch";
 import { Link } from "react-router-dom";
 
 import "../styles/Vehicles.css";

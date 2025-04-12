@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { getAllLocations } from "../store";
+import { getAllLocations } from "../services/Fetch";
 import { Link } from "react-router-dom";
 import "../styles/Planets.css";
 

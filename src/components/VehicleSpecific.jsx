@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useEffect } from "react";
-import { getSpecificVehicle } from "../store/";
+import { getSpecificVehicle } from "../services/Fetch";
 import FavoriteButton from "./FavoriteBuuton";
 
 function VehicleSpecific() {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { getAllCharacters } from "../store";
+import { getAllCharacters } from "../services/Fetch";
 import { Link } from "react-router-dom";
 import "../styles/Characters.css";
 

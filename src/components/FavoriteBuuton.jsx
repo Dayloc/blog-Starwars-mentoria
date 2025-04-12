@@ -2,7 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { addToFavorites, removeFromFavorites } from "../store/";
+import { addToFavorites, removeFromFavorites } from "../services/Fetch";
 
 const FavoriteButton = ({ item, type }) => {
   const { store, dispatch } = useGlobalReducer();
