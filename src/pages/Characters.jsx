@@ -66,7 +66,9 @@ function Characters() {
               </div>
             ))}
           </div>
-        ) : (
+        ) 
+        :
+        (
           <div className="loading-state">
             {!store.message?.includes("Error") ? (
               <>

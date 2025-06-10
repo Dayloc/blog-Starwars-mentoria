@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/CharacterDetail.css'; 
 import FavoriteButton from '../components/FavoriteBuuton'; // Asegúrate de que la ruta sea correcta
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 
 function CharacterSpecific() {
+  const { dispatch } = useGlobalReducer(); // Asegúrate de que useGlobalReducer esté importado correctamente
   const [personaje, setPersonaje] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -54,7 +56,7 @@ function CharacterSpecific() {
             />
           </div>
           <h2  className='mt-3'>{personaje.name}</h2>
-          <p className='text-warning mx-4'>Ddescription: </p>
+          <p className='text-warning mx-4'>Description: </p>
           <div >
              <p className='m-4'> {personaje.description}
               </p>
